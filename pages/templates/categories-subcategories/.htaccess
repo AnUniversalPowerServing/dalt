@@ -1,0 +1,40 @@
+# Default Timezone
+php_value date.timezone 'Asia/kolkata'
+
+# Disables Error Reporting on Screen
+#php_value display_errors Off 
+
+RewriteEngine on
+
+# Rewrite URLs
+RewriteRule products/([^/]+)/([^/]+)$ dac.module.product.categories.php?action=$1&do=$2 [QSA,L]
+
+RewriteRule tutorial/apptech/([^/]+)/([^/]+)$ pages/apptech.php?1=$1&2=$2 [QSA,L]
+RewriteRule tutorial/networking/([^/]+)/([^/]+)$ pages/netwrk.php?1=$1&2=$2 [QSA,L]
+
+# RewriteRule tutorial/reactjs/([^/]+)$ pages/reactjs.php?1=$1 [QSA,L]
+# RewriteRule tutorial/seo/([^/]+)$ pages/seo.php?1=$1 [QSA,L]
+# RewriteRule tutorial/javascript/([^/]+)$ pages/javascript.php?1=$1 [QSA,L]
+# RewriteRule tutorial/typescript/([^/]+)$ pages/typescript.php?1=$1 [QSA,L]
+# RewriteRule tutorial/aws/([^/]+)$ pages/aws.php?1=$1 [QSA,L]
+# RewriteRule tutorial/java/([^/]+)$ pages/java.php?1=$1 [QSA,L]
+
+
+#Rewrite URLs
+RewriteRule pickles/home  pages_pickles/default.php [QSA,L]
+RewriteRule pickles/my-profile pages_pickles/my-profile.php [QSA,L]
+RewriteRule pickles/my-order-history pages_pickles/my-order-history.php [QSA,L]
+RewriteRule pickles/my-cart pages_pickles/my-cart.php [QSA,L]
+RewriteRule pickles/contact-us pages_pickles/contact-us.php [QSA,L]
+RewriteRule pickles/auth pages_pickles/auth.php [QSA,L]
+RewriteRule pickles/sample pages_pickles/sample.php [QSA,L]
+
+#Rewrite URLs
+RewriteRule upn/default  pages_upn/default.php [QSA,L]
+
+#Rewrite URLs
+RewriteRule jsf/default  pages_jsf/index.php [QSA,L]
+RewriteRule jsf/webForm  pages_jsf/webForm.php [QSA,L]
+
+#Rewrite URLs
+RewriteRule kv/home  pages_kv/default.php [QSA,L]

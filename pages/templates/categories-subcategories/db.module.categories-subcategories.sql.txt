@@ -1,0 +1,41 @@
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `prod_categories`
+--
+
+CREATE TABLE IF NOT EXISTS `prod_categories` (
+  `cat_Id` int(11) NOT NULL AUTO_INCREMENT,
+  `categoryName` varchar(45) NOT NULL,
+  `categoryDesc` varchar(1500) NOT NULL,
+  PRIMARY KEY (`cat_Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `prod_categories_sub`
+--
+
+CREATE TABLE IF NOT EXISTS `prod_categories_sub` (
+  `subCat_Id` int(11) NOT NULL AUTO_INCREMENT,
+  `cat_Id` int(11) NOT NULL,
+  `subCategoriesName` varchar(45) NOT NULL,
+  `subCategoriesDesc` varchar(1500) NOT NULL,
+  PRIMARY KEY (`subCat_Id`),
+  KEY `cat_Id` (`cat_Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `prod_categories_sub`
+--
+ALTER TABLE `prod_categories_sub`
+  ADD CONSTRAINT `prod_categories_sub_ibfk_1` FOREIGN KEY (`cat_Id`) REFERENCES `prod_categories` (`cat_Id`);
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
