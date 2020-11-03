@@ -203,3 +203,19 @@ Tuesday 3rd November 2020 09:30:25 PM [INFO] ::: [app.database.php]  Database co
 Tuesday 3rd November 2020 09:30:54 PM [INFO] ::: [app.database.php]  Database connected successfully 
 Tuesday 3rd November 2020 09:33:23 PM [INFO] ::: [app.database.php]  Database connected successfully 
 Tuesday 3rd November 2020 10:24:25 PM [INFO] ::: [app.database.php]  Database connected successfully 
+Wednesday 4th November 2020 12:01:02 AM [INFO] ::: [app.database.php]  Database connected successfully 
+Wednesday 4th November 2020 12:01:22 AM [INFO] ::: [app.database.php]  Database connected successfully 
+Wednesday 4th November 2020 12:01:28 AM [INFO] ::: [app.database.php]  Database connected successfully 
+Wednesday 4th November 2020 12:01:38 AM [INFO] ::: [app.database.php]  Database connected successfully 
+Wednesday 4th November 2020 12:01:38 AM [INFO] ::: [app.database.php]  Database connected successfully 
+Wednesday 4th November 2020 12:01:38 AM [INFO] ::: [app.database.php]  Query(Status-success) : INSERT INTO prod_categories(categoryName, categoryDesc) VALUES ('Test','Test'); 
+Wednesday 4th November 2020 12:01:42 AM [INFO] ::: [app.database.php]  Database connected successfully 
+Wednesday 4th November 2020 12:01:46 AM [INFO] ::: [app.database.php]  Database connected successfully 
+Wednesday 4th November 2020 12:01:49 AM [INFO] ::: [app.database.php]  Database connected successfully 
+Wednesday 4th November 2020 12:04:08 AM [INFO] ::: [app.database.php]  Database connected successfully 
+Wednesday 4th November 2020 12:04:08 AM [INFO] ::: [app.database.php]  Database connected successfully 
+Wednesday 4th November 2020 12:04:08 AM [INFO] ::: [app.database.php]  Query(Status-success) : INSERT INTO prod_categories(categoryName, categoryDesc) VALUES ('Hello2','Hello2'); 
+Wednesday 4th November 2020 12:04:44 AM [INFO] ::: [app.database.php]  Database connected successfully 
+Wednesday 4th November 2020 12:10:31 AM [INFO] ::: [app.database.php]  Database connected successfully 
+Wednesday 4th November 2020 12:11:01 AM [INFO] ::: [app.database.php]  Database connected successfully 
+Wednesday 4th November 2020 12:22:54 AM [INFO] ::: [app.database.php]  Database connected successfully 

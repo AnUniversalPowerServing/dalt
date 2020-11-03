@@ -42,7 +42,8 @@ class ProductCategoriesAddUI {
 		content+='<textarea id="'+mode+'NewCategoryForm_categoryDesc" class="form-control" placeholder="Enter Category Description"></textarea>';
 		content+='</div>';
 		content+='<div class="form-group">';
-		content+='<button class="btn btn-default form-control" onclick="javascript:form_submit_'+mode+'NewCategory();"><b>'+mode+' New Category</b></button>';
+		content+='<button class="btn btn-default form-control" style="text-transform:capitalize;" ';
+		content+='onclick="javascript:form_submit_'+mode+'NewCategory();"><b>'+mode+' New Category</b></button>';
 		content+='</div>';
 	return content;
   }
@@ -53,7 +54,8 @@ class ProductCategoriesAddUI {
 class ProductCategoriesViewUI {
 	
   display(response){
-	 var content='<div>';
+	 var content=productCategoriesViewUI.viewCategoryEditModal();
+		 content+='<div>';
 		 content+='<h5 style="border-bottom:2px solid #ccc;padding-bottom:10px;"><b>Categories Information</b></h5>';
 	     content+='</div>';
 		 content+='<div class="list-group mbot0">';
@@ -79,7 +81,7 @@ class ProductCategoriesViewUI {
 		content+='<div class="container-fluid">';
 		content+='<div class="row">';
 		content+='<div class="col-sm-12">';
-		
+		content+=productCategoriesAddUI.viewCategoryForm('update');
 		content+='</div>';
 		content+='</div>';
 		content+='</div>';
@@ -140,7 +142,7 @@ class ProductCategoriesViewUI {
 	var content='<div class="curpoint" data-toggle="collapse" data-target="#categoryId-'+cat_Id+'">';
 		content+='<h5 style="border-bottom:2px solid #ccc;padding:10px;background-color:#eee;margin-top:0px;margin-bottom:0px;">';
 		content+='<i class="fa fa-angle-double-down" aria-hidden="true"></i> &nbsp; <b>'+categoryName+'</b>';
-		content+='<i class="fa fa-edit curpoint pull-right" onclick="alert();"></i>  &nbsp;';
+		content+='<i class="fa fa-edit curpoint pull-right" onclick="$(\'#viewCategoryEditModal\').modal();"></i>  &nbsp;';
 		content+='</h5>';
 		content+='</div>';
 		
@@ -220,6 +222,7 @@ function form_selOpt_categoriesList(div_Id){
 
 $(document).ready(function(){
   form_selOpt_categoriesList('addNewSubCategoryForm_categoryName');
+  document.getElementById("addNewCategoryForm").innerHTML = productCategoriesAddUI.viewCategoryForm('add');
   document.getElementById("ViewCategoriesInfo").innerHTML = productCategoriesViewUI.display(response);
 });
 </script>
@@ -237,7 +240,7 @@ $(document).ready(function(){
 	</div><!--/.form-group -->
 	
 	<div class="list-group">
-	<div class="list-group-item">
+	<div id="addNewCategoryForm" class="list-group-item">
 	
 	
 	
