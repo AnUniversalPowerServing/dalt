@@ -31,7 +31,24 @@ function bootstrap_alert(type, div_Id, message){
 </script>
 <script type="text/javascript">
 class ProductCategoriesAddUI {
-	
+  viewCategoryForm(mode){ // mode = add/update
+	var content='<div id="'+mode+'NewCategoryForm_alertMsg" class="form-group"></div>';
+		content+='<div class="form-group">';
+		content+='<label>Category Name</label>';
+		content+='<input type="text" id="'+mode+'NewCategoryForm_categoryName" class="form-control" placeholder="Enter Category Name"/>';
+		content+='</div>';
+		content+='<div class="form-group">';
+		content+='<label>Category Description</label>';
+		content+='<textarea id="'+mode+'NewCategoryForm_categoryDesc" class="form-control" placeholder="Enter Category Description"></textarea>';
+		content+='</div>';
+		content+='<div class="form-group">';
+		content+='<button class="btn btn-default form-control" onclick="javascript:form_submit_'+mode+'NewCategory();"><b>'+mode+' New Category</b></button>';
+		content+='</div>';
+	return content;
+  }
+  viewSubCategoryForm(mode){ // mode = add/update
+	  
+  }
 }
 class ProductCategoriesViewUI {
 	
@@ -50,10 +67,46 @@ class ProductCategoriesViewUI {
 	return content;
   }
   viewCategoryEditModal(){
-	  
+	var content='<div id="viewCategoryEditModal" class="modal fade" role="dialog">';
+		content+='<div class="modal-dialog">';
+		content+='<div class="modal-content">';
+		content+='<div class="modal-header">';
+        content+='<button type="button" class="close" data-dismiss="modal">&times;</button>';
+        content+='<h4 class="modal-title">Update Category</h4>';
+		content+='</div>';
+		content+='<div class="modal-body">';
+        
+		content+='<div class="container-fluid">';
+		content+='<div class="row">';
+		content+='<div class="col-sm-12">';
+		
+		content+='</div>';
+		content+='</div>';
+		content+='</div>';
+		
+		
+		content+='</div>';
+		content+='</div>';
+		content+='</div>';
+		content+='</div>';
+	return content;
   }
   viewSubCategoryEditModal(){
-	  
+	var content='<div id="viewCategoryEditModal" class="modal fade" role="dialog">';
+		content+='<div class="modal-dialog">';
+		content+='<div class="modal-content">';
+		content+='<div class="modal-header">';
+        content+='<button type="button" class="close" data-dismiss="modal">&times;</button>';
+        content+='<h4 class="modal-title">Update Sub-Category</h4>';
+		content+='</div>';
+		content+='<div class="modal-body">';
+        
+		
+		content+='</div>';
+		content+='</div>';
+		content+='</div>';
+		content+='</div>';
+	return content;  
   }
   viewSubCategory(response){
 	console.log(JSON.stringify(response));
@@ -186,18 +239,7 @@ $(document).ready(function(){
 	<div class="list-group">
 	<div class="list-group-item">
 	
-	<div id="addNewCategoryForm_alertMsg" class="form-group"></div>
-	<div class="form-group">
-	  <label>Category Name</label>
-	  <input type="text" id="addNewCategoryForm_categoryName" class="form-control" placeholder="Enter Category Name"/>
-	</div><!--/.form-group -->
-	<div class="form-group">
-	  <label>Category Description</label>
-	  <textarea id="addNewCategoryForm_categoryDesc" class="form-control" placeholder="Enter Category Description"></textarea>
-	</div><!--/.form-group -->
-	<div class="form-group">
-	  <button class="btn btn-default form-control" onclick="javascript:form_submit_addNewCategory();"><b>Add New Category</b></button>
-	</div><!--/.form-group -->
+	
 	
 	</div><!--/.list-group-item -->
 	</div><!--/.list-group -->
