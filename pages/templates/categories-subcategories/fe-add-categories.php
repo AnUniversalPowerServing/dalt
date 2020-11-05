@@ -31,19 +31,19 @@ function bootstrap_alert(type, div_Id, message){
 </script>
 <script type="text/javascript">
 class ProductCategoriesAddUI {
-  viewCategoryForm(mode){ // mode = add/update
-	var content='<div id="'+mode+'NewCategoryForm_alertMsg" class="form-group"></div>';
+  viewCategoryForm(){
+	var content='<div id="addNewCategoryForm_alertMsg" class="form-group"></div>';
 		content+='<div class="form-group">';
 		content+='<label>Category Name</label>';
-		content+='<input type="text" id="'+mode+'NewCategoryForm_categoryName" class="form-control" placeholder="Enter Category Name"/>';
+		content+='<input type="text" id="addNewCategoryForm_categoryName" class="form-control" placeholder="Enter Category Name"/>';
 		content+='</div>';
 		content+='<div class="form-group">';
 		content+='<label>Category Description</label>';
-		content+='<textarea id="'+mode+'NewCategoryForm_categoryDesc" class="form-control" placeholder="Enter Category Description"></textarea>';
+		content+='<textarea id="addNewCategoryForm_categoryDesc" class="form-control" placeholder="Enter Category Description"></textarea>';
 		content+='</div>';
 		content+='<div class="form-group">';
-		content+='<button class="btn btn-default form-control" style="text-transform:capitalize;" ';
-		content+='onclick="javascript:form_submit_'+mode+'NewCategory();"><b>'+mode+' New Category</b></button>';
+		content+='<button class="btn btn-default form-control" ';
+		content+='onclick="javascript:form_submit_addNewCategory();"><b>Add New Category</b></button>';
 		content+='</div>';
 	return content;
   }
@@ -51,10 +51,47 @@ class ProductCategoriesAddUI {
 	  
   }
 }
+var updateResponse = undefined; // This gets updated with response when a Modal gets clicked by User
+class ProductCategoriesUpdateUI {
+  viewCategoryForm(){
+    var cat_Id = ''; if(updateResponse!==undefined){ cat_Id = updateResponse.cat_Id; }
+	var categoryName = ''; if(updateResponse!==undefined){ categoryName = updateResponse.categoryName; }
+	var categoryDesc = ''; if(updateResponse!==undefined){ categoryDesc = updateResponse.categoryDesc; }
+	var content='<div id="updateNewCategoryForm_alertMsg" class="form-group"></div>';
+		content+='<div class="form-group">';
+		content+='<label>Category Name</label>';
+		content+='<input type="text" id="updateNewCategoryForm_categoryName" class="form-control" ';
+		content+='placeholder="Enter Category Name" value="'+categoryName+'" disabled/>';
+		content+='</div>';
+		content+='<div class="form-group">';
+		content+='<label>Category Description</label>';
+		content+='<textarea id="updateNewCategoryForm_categoryDesc" class="form-control" ';
+		content+='placeholder="Enter Category Description" disabled>'+categoryDesc+'</textarea>';
+		content+='</div>';
+		content+='<div align="center" class="form-group">';
+		content+='<div align="center" class="btn-group">';
+		content+='<button class="btn btn-default" ';
+		content+='onclick="javascript:form_submit_editUpdateCategory();"><b>Edit Category</b></button>';
+		content+='<button class="btn btn-default" ';
+		content+='onclick="javascript:form_submit_saveUpdateCategory();"><b>save Category</b></button>';
+		content+='<button class="btn btn-default" ';
+		content+='onclick="javascript:form_submit_resetUpdateCategory();"><b>Reset</b></button>';
+		content+='</div>';
+		content+='</div>';
+	return content;
+  }
+  viewSubCategoryForm(){ // mode = add/update
+	  
+  }
+}
 class ProductCategoriesViewUI {
-	
+  setCategoryResponseOnUpdate(index){
+	updateResponse = response[index]; 
+	document.getElementById("viewCategoryEditModal").innerHTML = productCategoriesViewUI.viewCategoryEditModal()
+	$('#viewCategoryEditModal').modal();
+  }
   display(response){
-	 var content=productCategoriesViewUI.viewCategoryEditModal();
+	 var content='<div id="viewCategoryEditModal" class="modal fade" role="dialog"></div>';
 		 content+='<div>';
 		 content+='<h5 style="border-bottom:2px solid #ccc;padding-bottom:10px;"><b>Categories Information</b></h5>';
 	     content+='</div>';
@@ -62,15 +99,14 @@ class ProductCategoriesViewUI {
 		 content+='<div class="list-group-item">';
 		
 	for(var index=0;index<response.length;index++){
-	 content+=productCategoriesViewUI.viewCategory(response[index]);
+	 content+=productCategoriesViewUI.viewCategory(index, response[index]);
 	}
 	content+='</div>';
 	content+='</div>';
 	return content;
   }
   viewCategoryEditModal(){
-	var content='<div id="viewCategoryEditModal" class="modal fade" role="dialog">';
-		content+='<div class="modal-dialog">';
+	var content='<div class="modal-dialog">';
 		content+='<div class="modal-content">';
 		content+='<div class="modal-header">';
         content+='<button type="button" class="close" data-dismiss="modal">&times;</button>';
@@ -81,13 +117,12 @@ class ProductCategoriesViewUI {
 		content+='<div class="container-fluid">';
 		content+='<div class="row">';
 		content+='<div class="col-sm-12">';
-		content+=productCategoriesAddUI.viewCategoryForm('update');
+		content+=productCategoriesUpdateUI.viewCategoryForm();
 		content+='</div>';
 		content+='</div>';
 		content+='</div>';
 		
 		
-		content+='</div>';
 		content+='</div>';
 		content+='</div>';
 		content+='</div>';
@@ -131,18 +166,18 @@ class ProductCategoriesViewUI {
 	 content+='</div>';
 	return content;
   }
-  viewCategory(response){
+  viewCategory(index, response){
 	var cat_Id = response.cat_Id;
 	var categoryName = response.categoryName;
 	var categoryDesc = response.categoryDesc;
-	var createdOn = response.categoryDesc;
+	var createdOn = response.createdOn;
 	var subcategories = response.subcategories;
 	var lastUpdated_on = response.lastUpdated_on;
 	
 	var content='<div class="curpoint" data-toggle="collapse" data-target="#categoryId-'+cat_Id+'">';
 		content+='<h5 style="border-bottom:2px solid #ccc;padding:10px;background-color:#eee;margin-top:0px;margin-bottom:0px;">';
 		content+='<i class="fa fa-angle-double-down" aria-hidden="true"></i> &nbsp; <b>'+categoryName+'</b>';
-		content+='<i class="fa fa-edit curpoint pull-right" onclick="$(\'#viewCategoryEditModal\').modal();"></i>  &nbsp;';
+		content+='<i class="fa fa-edit curpoint pull-right" onclick="javascript:productCategoriesViewUI.setCategoryResponseOnUpdate('+index+');"></i>  &nbsp;';
 		content+='</h5>';
 		content+='</div>';
 		
@@ -173,6 +208,7 @@ class ProductCategoriesViewUI {
 var response = [{"cat_Id":"1","categoryName":"Goods and Services","categoryDesc":"Antega Antega","createdOn":"0000-00-00 00:00:00","lastUpdated_on":"0000-00-00 00:00:00","subcategories":[{"subCat_Id":"1","cat_Id":"1","subCategoriesName":"sdfd","subCategoriesDesc":"efwe","createdOn":"2020-11-03 17:10:11","lastModifiedOn":"2020-11-03 17:09:29"}]},{"cat_Id":"2","categoryName":"Anup","categoryDesc":"SuperMan","createdOn":"0000-00-00 00:00:00","lastUpdated_on":"0000-00-00 00:00:00","subcategories":[]},{"cat_Id":"3","categoryName":"vbg","categoryDesc":"wdef","createdOn":"0000-00-00 00:00:00","lastUpdated_on":"0000-00-00 00:00:00","subcategories":[{"subCat_Id":"2","cat_Id":"3","subCategoriesName":"asdes","subCategoriesDesc":"awdaw","createdOn":"2020-11-03 17:53:32","lastModifiedOn":"2020-11-03 17:53:32"}]},{"cat_Id":"4","categoryName":"Hello","categoryDesc":"Hello","createdOn":"0000-00-00 00:00:00","lastUpdated_on":"0000-00-00 00:00:00","subcategories":[]},{"cat_Id":"5","categoryName":"Hello","categoryDesc":"Hello","createdOn":"2020-11-03 17:12:27","lastUpdated_on":"2020-11-03 17:12:27","subcategories":[]},{"cat_Id":"6","categoryName":"Hello1","categoryDesc":"Hello","createdOn":"2020-11-03 17:19:33","lastUpdated_on":"2020-11-03 17:19:33","subcategories":[]}];
 var productCategoriesViewUI = new ProductCategoriesViewUI();
 var productCategoriesAddUI = new ProductCategoriesAddUI();
+var productCategoriesUpdateUI = new ProductCategoriesUpdateUI();
 </script>
 <script type="text/javascript">
 function form_submit_addNewCategory(){
@@ -222,7 +258,7 @@ function form_selOpt_categoriesList(div_Id){
 
 $(document).ready(function(){
   form_selOpt_categoriesList('addNewSubCategoryForm_categoryName');
-  document.getElementById("addNewCategoryForm").innerHTML = productCategoriesAddUI.viewCategoryForm('add');
+  document.getElementById("addNewCategoryForm").innerHTML = productCategoriesAddUI.viewCategoryForm();
   document.getElementById("ViewCategoriesInfo").innerHTML = productCategoriesViewUI.display(response);
 });
 </script>
